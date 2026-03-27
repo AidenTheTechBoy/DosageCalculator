@@ -57,7 +57,7 @@
         const pillSizeMg = Number(document.getElementById('pillSizeMg').value);
 
         const weightKg = lbsToKg(weightLbs);
-        const dosageMg = calculateDosage(weightLbs, dosageMgPerKg);
+        const dosageMg = calculateDosage(weightKg, dosageMgPerKg);
         const pillsPerDose = calculateNumberOfPills(dosageMg, pillSizeMg);
         const pillsPerDoseRounded = roundToNearestQuarter(pillsPerDose);
         const actualDosage = pillsPerDoseRounded * pillSizeMg;
