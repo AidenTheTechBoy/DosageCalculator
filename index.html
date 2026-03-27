@@ -26,11 +26,6 @@
                 </div>
 
                 <div class="col-12">
-                  <label for="frequencyPerDay" class="form-label">Frequency Per Day</label>
-                  <input type="number" class="form-control" id="frequencyPerDay" step="1" min="1" required>
-                </div>
-
-                <div class="col-12">
                   <label for="pillSizeMg" class="form-label">Pill Size (mg)</label>
                   <input type="number" class="form-control" id="pillSizeMg" step="any" min="0.01" required>
                 </div>
@@ -59,19 +54,21 @@
 
         const weightLbs = Number(document.getElementById('weightLbs').value);
         const dosageMgPerKg = Number(document.getElementById('dosageMgPerKg').value);
-        const frequencyPerDay = Number(document.getElementById('frequencyPerDay').value);
         const pillSizeMg = Number(document.getElementById('pillSizeMg').value);
 
-        const dailyDosageMg = calculateDailyDosageMg(weightLbs, dosageMgPerKg);
-        const individualDosageMg = calculateIndividualDosage(dailyDosageMg, frequencyPerDay);
-        const dailyPills = calculateNumberOfPills(dailyDosageMg, pillSizeMg);
-        const individualPills = calculateNumberOfPills(individualDosageMg, pillSizeMg);
+        const dosageMg = calculateDosage(weightLbs, dosageMgPerKg);
+        const pillsPerDose = calculateNumberOfPills(dosageMg, pillSizeMg);
+        const pillsPerDoseRounded = roundToNearestQuarter(pillsPerDose);
+        const actualDosage = pillsPerDoseRounded * pillSizeMg;
+        const difference = actualDosage - dosageMg;
 
         output.innerHTML = `
-          <div><strong>Daily dosage:</strong> ${roundToNearestHundredth(dailyDosageMg)} mg daily</div>
-          <div><strong>Per dose:</strong> ${roundToNearestHundredth(individualDosageMg)} mg per dose</div>
-          <div><strong>Pills per day:</strong> ${roundToNearestHundredth(dailyPills)} pills per day</div>
-          <div><strong>Pills per dose:</strong> ${roundToNearestHundredth(individualPills)} pills per dose</div>
+          <div><strong>Estimated pills per dose:</strong> ${roundToNearestHundredth(pillsPerDose)} pills per dose</div>
+          <div><strong>Actual pills per dose:</strong> <span class="text-primary">${pillsPerDoseRounded} pills per dose</span></div>
+          <br/>
+          <div><strong>Expected Dosage: </strong> ${roundToNearestHundredth(dosageMg)} mg</div>
+          <div><strong>Actual Dosage:</strong> ${roundToNearestHundredth(actualDosage)} mg</div>
+          <div><strong>Difference:</strong> <span class="text-primary">${difference > 0 ? '+' : ''}${roundToNearestHundredth(difference)} mg</span></div>
         `;
       });
     </script>
