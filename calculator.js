@@ -1,7 +1,10 @@
 const LBS_TO_KG = 0.45359237;
 
-function calculateDosage(weightLbs, dosageMgPerKg) {
-    const weightKg = weightLbs * LBS_TO_KG;
+function lbsToKg(lbs) {
+    return lbs * LBS_TO_KG;
+}
+
+function calculateDosage(weightKg, dosageMgPerKg) {
     return weightKg * dosageMgPerKg;
 }
 
