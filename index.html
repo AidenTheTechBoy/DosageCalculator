@@ -84,7 +84,7 @@
           <div><strong>Actual Dosage:</strong> ${roundToNearestHundredth(actualDosage.result)} mg</div>
           <br/>
           <div><code>${displayResult(difference)}</code></div>
-          <div><strong>Difference:</strong> <span class="text-primary">${difference > 0 ? '+' : ''}${roundToNearestHundredth(difference.result)} mg</span></div>
+          <div><strong>Difference:</strong> <span class="text-primary">${difference.result > 0 ? '+' : ''}${roundToNearestHundredth(difference.result)} mg</span></div>
         `;
       });
     </script>
