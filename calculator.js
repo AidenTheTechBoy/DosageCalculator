@@ -35,8 +35,8 @@ function calculateActualDosage(pillCount, dosageMgPerPill) {
 function calculateDifference(expectedDosage, actualDosage) {
     return {
         units: 'mg',
-        result: expectedDosage.result - actualDosage.result,
-        calculation: `${rnd(expectedDosage.result)} mg - ${rnd(actualDosage.result)} mg`
+        result: actualDosage.result - expectedDosage.result,
+        calculation: `${rnd(actualDosage.result)} mg - ${rnd(expectedDosage.result)} mg`
     };
 }
 
